@@ -23,7 +23,9 @@ namespace AzureTest
             {
                 return new BadRequestObjectResult("Received data invalid");
             }
-            return (ActionResult)new OkObjectResult($"Order processed successfully");
+            if (orderData == null)
+                return (ActionResult)new OkObjectResult($"Order object is null");
+            return (ActionResult)new OkObjectResult(string.Format($"Order processed successfully: e={0} fn={1} w={2} h={3}", orderData.CustomerEmail, orderData.FileName, orderData.RequiredWidth, orderData.RequiredHeight));
 
         }
 
